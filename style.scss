@@ -7,7 +7,13 @@
 }
 
 :root {
-  --dark-color: #000;
+  --dark-color: #020506;
+  --deep-teal: #06363a;
+  --petal-teal: #14aeb8;
+  --moonlight: #f6ebd4;
+  --flower-glow: #b9fff0;
+  --firefly-gold: #ffe86a;
+  --sway-easing: cubic-bezier(0.37, 0, 0.63, 1);
 }
 
 body {
@@ -15,10 +21,147 @@ body {
   align-items: flex-end;
   justify-content: center;
   min-height: 100vh;
-  background-color: var(--dark-color);
+  background: radial-gradient(circle at 50% 35%, var(--deep-teal) 0%, var(--dark-color) 42%);
   overflow: hidden;
   perspective: 1000px;
   padding: 50px 0px;
+  color: var(--moonlight);
+}
+
+.love-note {
+  position: fixed;
+  z-index: 30;
+  top: clamp(1rem, 3.5vh, 2rem);
+  left: 50%;
+  width: min(82vw, 31rem);
+  padding-inline: 1rem;
+  transform: translateX(-50%);
+  text-align: center;
+  pointer-events: none;
+  animation: note-reveal 2.4s var(--sway-easing) 3.8s both;
+
+  &__eyebrow {
+    margin-bottom: 0.7rem;
+    color: var(--flower-glow);
+    font: 500 clamp(0.72rem, 1.8vmin, 0.95rem)/1.4 "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    letter-spacing: 0.08em;
+  }
+
+  &__message {
+    color: var(--moonlight);
+    font: clamp(1.1rem, 3.4vmin, 1.65rem)/1.4 "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    text-wrap: balance;
+    text-shadow: 0 0 2rem rgba(185, 255, 240, 0.22);
+  }
+}
+
+@keyframes note-reveal {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 0.7rem);
+  }
+  to {
+    opacity: 0.92;
+    transform: translate(-50%, 0);
+  }
+}
+
+.love-counter {
+  position: fixed;
+  z-index: 30;
+  left: clamp(1rem, 4vw, 3rem);
+  bottom: clamp(1rem, 4vh, 2rem);
+  display: grid;
+  gap: 0.15rem;
+  color: rgba(246, 235, 212, 0.72);
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  text-align: left;
+
+  &__label {
+    color: rgba(185, 255, 240, 0.72);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+  }
+
+  &__days {
+    color: var(--moonlight);
+    font-size: clamp(1.35rem, 3.4vmin, 2rem);
+    line-height: 1.05;
+    text-shadow: 0 0 1.5rem rgba(185, 255, 240, 0.18);
+  }
+
+  &__time {
+    display: flex;
+    gap: 0.55rem;
+    color: rgba(246, 235, 212, 0.58);
+    font-size: 0.7rem;
+  }
+}
+
+.sound-toggle {
+  position: fixed;
+  z-index: 40;
+  top: clamp(1rem, 4vh, 2.5rem);
+  left: clamp(1rem, 4vw, 3rem);
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 1px solid rgba(185, 255, 240, 0.3);
+  border-radius: 50%;
+  background: rgba(2, 5, 6, 0.32);
+  color: var(--flower-glow);
+  cursor: pointer;
+  font: 1.1rem/1 "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  transition: background-color 300ms var(--sway-easing), border-color 300ms var(--sway-easing), transform 300ms var(--sway-easing);
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--flower-glow);
+    background: rgba(6, 54, 58, 0.7);
+    transform: scale(1.06);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--moonlight);
+    outline-offset: 3px;
+  }
+}
+
+.flower--glow .flower__leafs {
+  filter: brightness(1.45) drop-shadow(0 0 2.4vmin var(--flower-glow));
+  transition: filter 150ms var(--sway-easing);
+}
+
+.shooting-star {
+  position: absolute;
+  top: var(--star-top);
+  left: calc(100% + 1rem);
+  width: clamp(5rem, 13vw, 8rem);
+  height: 1px;
+  border-radius: 999px;
+  background: linear-gradient(to right, transparent, rgba(246, 235, 212, 0.15) 28%, var(--moonlight));
+  transform-origin: right center;
+  opacity: 0;
+  animation: shooting-star var(--star-duration) var(--sway-easing) var(--star-delay) infinite;
+
+  &::before {
+    content: "";
+    position: absolute;
+    right: -0.15rem;
+    top: 50%;
+    width: 0.38rem;
+    height: 0.38rem;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    background: var(--moonlight);
+    box-shadow: 0 0 0.6rem 0.15rem var(--firefly-gold);
+  }
+}
+
+@keyframes shooting-star {
+  0%, 78% { opacity: 0; transform: translate(0, 0); }
+  82% { opacity: 0.85; }
+  94% { opacity: 0; transform: translate(-125vw, 68vh); }
+  100% { opacity: 0; }
 }
 
 .night {
@@ -28,6 +171,7 @@ body {
   transform: translateX(-50%);
   width: 100%;
   height: 100%;
+  overflow: hidden;
   filter: blur(0.1vmin);
 }
 
@@ -43,9 +187,13 @@ body {
   z-index: 10;
 
   --fl-speed: 0.8s;
+  --wind-duration: 6s;
+  --wind-delay: 0s;
+  --wind-angle: 1deg;
+  will-change: transform;
 
   &--1 {
-    animation: moving-flower-1 4s linear infinite;
+    animation: moving-flower-1 var(--wind-duration) var(--sway-easing) var(--wind-delay) infinite;
     .flower__line {
       $delay: 0.3s;
 
@@ -83,7 +231,7 @@ body {
   &--2 {
     left: 50%;
     transform: rotate(20deg);
-    animation: moving-flower-2 4s linear infinite;
+    animation: moving-flower-2 var(--wind-duration) var(--sway-easing) var(--wind-delay) infinite;
     .flower__line {
       height: 60vmin;
       animation-delay: 0.6s;
@@ -111,7 +259,7 @@ body {
   &--3 {
     left: 50%;
     transform: rotate(-15deg);
-    animation: moving-flower-3 4s linear infinite;
+    animation: moving-flower-3 var(--wind-duration) var(--sway-easing) var(--wind-delay) infinite;
     .flower__line {
       animation-delay: 0.9s;
       &__leaf {
@@ -154,10 +302,12 @@ body {
       left: 0;
       top: 0;
       transform: translate(-50%, -100%);
-      width: 8vmin;
-      height: 8vmin;
-      background-color: #6bf0ff;
-      filter: blur(10vmin);
+      width: 6vmin;
+      height: 6vmin;
+      border-radius: 50%;
+      background: rgba(107, 240, 255, 0.45);
+      filter: blur(5vmin);
+      opacity: 0.7;
     }
   }
 
@@ -402,7 +552,7 @@ body {
     background-color: rgb(255, 251, 0);
     border-radius: 50%;
     filter: blur(0.2vmin);
-    animation: light-ans 4s linear infinite backwards;
+    animation: light-ans 4s var(--sway-easing) infinite backwards;
 
     &:nth-child(odd) {
       background-color: #23f0ff;
@@ -464,7 +614,7 @@ body {
     transform: rotate(-48deg) rotateY(40deg);
 
     &--1 {
-      animation: moving-grass 2s linear infinite;
+      animation: moving-grass 2s var(--sway-easing) infinite;
     }
 
     &--2 {
@@ -473,7 +623,7 @@ body {
       transform: scale(0.5) rotate(75deg) rotateX(10deg) rotateY(-200deg);
       opacity: 0.8;
       z-index: 0;
-      animation: moving-grass--2 1.5s linear infinite;
+      animation: moving-grass--2 1.5s var(--sway-easing) infinite;
     }
 
     &--top {
@@ -646,7 +796,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    animation: flower-g-long-ans 3s linear infinite;
+    animation: flower-g-long-ans 3s var(--sway-easing) infinite;
 
     @keyframes flower-g-long-ans {
       0%,
@@ -699,13 +849,13 @@ body {
     }
 
     &--1 {
-      animation: flower-g-right-ans 2.5s linear infinite;
+      animation: flower-g-right-ans 2.5s var(--sway-easing) infinite;
     }
 
     &--2 {
       left: 5vmin;
       transform: rotateY(-180deg);
-      animation: flower-g-right-ans--2 3s linear infinite;
+      animation: flower-g-right-ans--2 3s var(--sway-easing) infinite;
 
       .leaf {
         height: 75vmin;
@@ -744,7 +894,7 @@ body {
     z-index: 100;
     transform-origin: bottom center;
     transform: rotate(-28deg) rotateY(30deg) scale(1.04);
-    animation: flower__g-front-ans 2s linear infinite;
+    animation: flower__g-front-ans 2s var(--sway-easing) infinite;
 
     @keyframes flower__g-front-ans {
       0%,
@@ -900,7 +1050,7 @@ body {
     transform-origin: bottom left;
     z-index: 10;
 
-    animation: flower__g-fr-ans 2s linear infinite;
+    animation: flower__g-fr-ans 2s var(--sway-easing) infinite;
 
     @keyframes flower__g-fr-ans {
       0%,
@@ -1161,13 +1311,13 @@ body {
 
     &--0 {
       left: 2vmin;
-      animation: leaf-ans-1 4s linear infinite;
+      animation: leaf-ans-1 4s var(--sway-easing) infinite;
     }
 
     &--1 {
       --w: 5vmin;
       --h: 60vmin;
-      animation: leaf-ans-1 4s linear infinite;
+      animation: leaf-ans-1 4s var(--sway-easing) infinite;
     }
 
     &--2 {
@@ -1177,7 +1327,7 @@ body {
       bottom: 5vmin;
       transform-origin: bottom left;
       transform: rotateY(-180deg);
-      animation: leaf-ans-2 3s linear infinite;
+      animation: leaf-ans-2 3s var(--sway-easing) infinite;
     }
 
     &--3 {
@@ -1187,7 +1337,7 @@ body {
       bottom: 3.2vmin;
       transform-origin: bottom left;
       transform: rotate(-10deg) rotateY(-180deg);
-      animation: leaf-ans-3 3s linear infinite;
+      animation: leaf-ans-3 3s var(--sway-easing) infinite;
     }
   }
 }
@@ -1268,33 +1418,57 @@ body {
 @keyframes moving-flower-1 {
   0%,
   100% {
-    transform: rotate(2deg);
+    transform: rotate(calc(2deg + var(--wind-angle)));
+  }
+
+  25% {
+    transform: rotate(0.5deg);
   }
 
   50% {
-    transform: rotate(-2deg);
+    transform: rotate(calc(-2deg - var(--wind-angle)));
+  }
+
+  75% {
+    transform: rotate(-0.5deg);
   }
 }
 
 @keyframes moving-flower-2 {
   0%,
   100% {
-    transform: rotate(18deg);
+    transform: rotate(calc(18deg + var(--wind-angle)));
+  }
+
+  25% {
+    transform: rotate(16.5deg);
   }
 
   50% {
-    transform: rotate(14deg);
+    transform: rotate(calc(14deg - var(--wind-angle)));
+  }
+
+  75% {
+    transform: rotate(16deg);
   }
 }
 
 @keyframes moving-flower-3 {
   0%,
   100% {
-    transform: rotate(-18deg);
+    transform: rotate(calc(-18deg - var(--wind-angle))) rotateY(-4deg);
+  }
+
+  25% {
+    transform: rotate(-19deg) rotateY(-7deg);
   }
 
   50% {
-    transform: rotate(-20deg) rotateY(-10deg);
+    transform: rotate(calc(-20deg + var(--wind-angle))) rotateY(-10deg);
+  }
+
+  75% {
+    transform: rotate(-19deg) rotateY(-7deg);
   }
 }
 
@@ -1359,4 +1533,61 @@ body {
 
 .not-loaded * {
   animation-play-state: paused !important;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 24px 0 8px;
+  }
+
+  .flowers {
+    transform: translateY(-2vh) scale(0.62);
+  }
+
+  .love-note {
+    top: 1rem;
+    width: min(88vw, 22rem);
+  }
+
+  .love-note__message {
+    font-size: clamp(1rem, 5.2vw, 1.35rem);
+    line-height: 1.28;
+  }
+
+  .love-counter {
+    left: 1rem;
+    bottom: 1rem;
+  }
+
+  .sound-toggle {
+    top: 1rem;
+    left: 1rem;
+  }
+}
+
+@media (min-width: 601px) {
+  .flowers {
+    transform: scale(0.82);
+  }
+}
+
+@media (min-width: 1200px) {
+  .flowers {
+    transform: scale(0.9);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+  }
+
+  .shooting-star,
+  .flower--glow .flower__leafs {
+    display: none;
+  }
 }
