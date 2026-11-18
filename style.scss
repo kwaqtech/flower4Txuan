@@ -134,19 +134,19 @@ body {
 .shooting-star {
   position: absolute;
   top: var(--star-top);
-  left: calc(100% + 1rem);
+  left: -9rem;
   width: clamp(5rem, 13vw, 8rem);
   height: 1px;
   border-radius: 999px;
-  background: linear-gradient(to right, transparent, rgba(246, 235, 212, 0.15) 28%, var(--moonlight));
-  transform-origin: right center;
+  background: linear-gradient(to left, transparent, rgba(246, 235, 212, 0.15) 28%, var(--moonlight));
+  transform-origin: left center;
   opacity: 0;
   animation: shooting-star var(--star-duration) var(--sway-easing) var(--star-delay) infinite;
 
   &::before {
     content: "";
     position: absolute;
-    right: -0.15rem;
+    left: -0.15rem;
     top: 50%;
     width: 0.38rem;
     height: 0.38rem;
@@ -160,7 +160,7 @@ body {
 @keyframes shooting-star {
   0%, 78% { opacity: 0; transform: translate(0, 0); }
   82% { opacity: 0.85; }
-  94% { opacity: 0; transform: translate(-125vw, 68vh); }
+  94% { opacity: 0; transform: translate(125vw, 68vh); }
   100% { opacity: 0; }
 }
 

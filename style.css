@@ -134,12 +134,12 @@ body {
 .shooting-star {
   position: absolute;
   top: var(--star-top);
-  left: calc(100% + 1rem);
+  left: -9rem;
   width: clamp(5rem, 13vw, 8rem);
   height: 1px;
   border-radius: 999px;
-  background: linear-gradient(to right, transparent, rgba(246, 235, 212, 0.15) 28%, var(--moonlight));
-  transform-origin: right center;
+  background: linear-gradient(to left, transparent, rgba(246, 235, 212, 0.15) 28%, var(--moonlight));
+  transform-origin: left center;
   opacity: 0;
   animation: shooting-star var(--star-duration) var(--sway-easing) var(--star-delay) infinite;
 }
@@ -147,7 +147,7 @@ body {
 .shooting-star::before {
   content: "";
   position: absolute;
-  right: -0.15rem;
+  left: -0.15rem;
   top: 50%;
   width: 0.38rem;
   height: 0.38rem;
@@ -170,7 +170,7 @@ body {
 
   94% {
     opacity: 0;
-    transform: translate(-125vw, 68vh);
+    transform: translate(125vw, 68vh);
   }
 
   100% {
