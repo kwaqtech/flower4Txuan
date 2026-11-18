@@ -131,52 +131,6 @@ body {
   transition: filter 150ms var(--sway-easing);
 }
 
-.shooting-star {
-  position: absolute;
-  top: var(--star-top);
-  left: -9rem;
-  width: clamp(5rem, 13vw, 8rem);
-  height: 1px;
-  border-radius: 999px;
-  background: linear-gradient(to right, var(--moonlight), rgba(246, 235, 212, 0.15) 28%, transparent);
-  transform-origin: left center;
-  opacity: 0;
-  animation: shooting-star var(--star-duration) var(--sway-easing) var(--star-delay) infinite;
-}
-
-.shooting-star::before {
-  content: "";
-  position: absolute;
-  left: -0.15rem;
-  top: 50%;
-  width: 0.38rem;
-  height: 0.38rem;
-  border-radius: 50%;
-  transform: translateY(-50%);
-  background: var(--moonlight);
-  box-shadow: 0 0 0.6rem 0.15rem var(--firefly-gold);
-}
-
-@keyframes shooting-star {
-  0%,
-  78% {
-    opacity: 0;
-    transform: translate(0, 0);
-  }
-
-  82% {
-    opacity: 0.85;
-  }
-
-  94% {
-    opacity: 0;
-    transform: translate(125vw, 68vh);
-  }
-
-  100% {
-    opacity: 0;
-  }
-}
 
 .night {
   position: fixed;
@@ -1448,7 +1402,6 @@ body {
     animation-delay: 0ms !important;
   }
 
-  .shooting-star,
   .flower--glow .flower__leafs {
     display: none;
   }

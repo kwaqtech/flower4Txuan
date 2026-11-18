@@ -15,14 +15,6 @@ const addGentleWind = () => {
   });
 };
 
-const addShootingStars = () => {
-  document.querySelectorAll(".shooting-star").forEach((star) => {
-    star.style.setProperty("--star-delay", `${randomBetween(2, 14).toFixed(2)}s`);
-    star.style.setProperty("--star-duration", `${randomBetween(7, 11).toFixed(2)}s`);
-    star.style.setProperty("--star-top", `${randomBetween(8, 42).toFixed(2)}vh`);
-  });
-};
-
 const updateCounter = () => {
   const elapsed = Math.max(0, Date.now() - new Date(`${CONFIG.startDate}T00:00:00`).getTime());
   const minutes = Math.floor(elapsed / 60000);
@@ -75,7 +67,6 @@ const setupFlowerGlow = () => {
 window.addEventListener("load", () => {
   setupPersonalization();
   addGentleWind();
-  addShootingStars();
   setupAudio();
   setupFlowerGlow();
   updateCounter();
