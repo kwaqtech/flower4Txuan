@@ -138,7 +138,7 @@ body {
   width: clamp(5rem, 13vw, 8rem);
   height: 1px;
   border-radius: 999px;
-  background: linear-gradient(to left, transparent, rgba(246, 235, 212, 0.15) 28%, var(--moonlight));
+  background: linear-gradient(to right, var(--moonlight), rgba(246, 235, 212, 0.15) 28%, transparent);
   transform-origin: left center;
   opacity: 0;
   animation: shooting-star var(--star-duration) var(--sway-easing) var(--star-delay) infinite;
